@@ -1,2 +1,32 @@
 # Object-Detection-from-360-Degree-Video
 360度動画から透視投影画像を生成し、YOLOによるランドマーク検出と精度評価を行う卒業研究コード
+
+
+目的
+
+観光地において360度周回映像からランドマークを検出し，それらが撮影できる場所と角度を，GPS情報などを基に算出してユーザに示すことを最終目的とするが，本論文では第一段階として360度映像から既存の物体検出フレームワークを活用して，複数のランドマークを検出する手法について分析した．
+
+
+プログラムの説明
+
+evaluate_detection_results.py　物体検出結果（prediction）と正解ラベル（test）を比較して、TP・FP・TN・FNを計算し、IoUも記録する評価コード
+
+Evaluation_index_calculation.py　すでに求めたTP、TN、FP、FNからAccuracy、Precision、Recall、F1スコアを計算して表示するプログラム
+
+extract_perspective_from_360_video.py　正距円筒図法の360度動画から、任意方向の透視投影画像を生成するプログラム。このプログラムは15秒ごとに1枚、1フレームを24方向に切り出しを行っている
+
+how_to_use_pandas.py　result.csv に保存されているIoUの値を読み込んで表示する
+
+IoU.py　IoUを算出する関数。a と b にバウンディングボックスの値を入れると、IoUが計算される
+
+loadModel.py　学習済みYOLOモデルを検証データで評価し、精度指標を算出する
+
+loadModel2.py　YOLOの検証を実行し、混同行列をpandas形式で取得、表示する
+
+percent.py　各画像の最大バウンディングボックス面積割合を求めてCSVに保存するコード
+
+read_images_in_folder.py　推論対象フォルダ内の全画像に対して物体検出を実行し、検出結果をテキスト形式で保存する
+
+yolo_photo_test.py　1枚の画像に対して学習済みYOLOモデルで推論を行い、YOLO形式txt保存し、検出画像保存までを行う
+
+YOLO_train_cascle.py　YOLOv11n の学習を実行する
